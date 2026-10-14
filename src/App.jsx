@@ -1,59 +1,36 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
-import RequireAuth from './components/RequireAuth.jsx';
-import ClientLayout from './layouts/ClientLayout.jsx';
-import AdminLayout from './layouts/AdminLayout.jsx';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { CadastroProduto } from './pages/Admin/CadastroProduto'
+import Cadastro from './pages/Cadastro'
+import Refazersenha from './pages/Cadastro/refazersenha'
+import EsqueuseSenha from './pages/Esqueceusenha'
+import Carrinho from './pages/Carrinho'
+import Home from './pages/Home'
+import Login from './pages/Login'
+import PerfilAdmin from './pages/Admin/Perfil'
+import PerfilCliente from './pages/Perfil'
+import Relatorios from './pages/Relatorios'
+import ProtectedRoute from './components/ProtectedRoute'
 
-import Login from './pages/auth/Login.jsx';
-import Register from './pages/auth/Register.jsx';
-
-import Catalog from './pages/client/Catalog.jsx';
-import ProductDetail from './pages/client/ProductDetail.jsx';
-import Cart from './pages/client/Cart.jsx';
-import MyOrders from './pages/client/MyOrders.jsx';
-import ClientProfile from './pages/client/Profile.jsx';
-
-import AdminProducts from './pages/admin/Products.jsx';
-import ProductForm from './pages/admin/ProductForm.jsx';
-import AdminOrders from './pages/admin/Orders.jsx';
-import AdminProfile from './pages/admin/Profile.jsx';
-
-export default function App() {
+function App() {
   return (
-    <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/cadastro" element={<Register />} />
-
-      <Route
-        element={
-          <RequireAuth role="client">
-            <ClientLayout />
-          </RequireAuth>
-        }
-      >
-        <Route index element={<Catalog />} />
-        <Route path="produtos/:id" element={<ProductDetail />} />
-        <Route path="carrinho" element={<Cart />} />
-        <Route path="pedidos" element={<MyOrders />} />
-        <Route path="perfil" element={<ClientProfile />} />
-      </Route>
-
-      <Route
-        path="/admin"
-        element={
-          <RequireAuth role="admin">
-            <AdminLayout />
-          </RequireAuth>
-        }
-      >
-        <Route index element={<Navigate to="produtos" replace />} />
-        <Route path="produtos" element={<AdminProducts />} />
-        <Route path="produtos/novo" element={<ProductForm />} />
-        <Route path="produtos/:id/editar" element={<ProductForm />} />
-        <Route path="pedidos" element={<AdminOrders />} />
-        <Route path="perfil" element={<AdminProfile />} />
-      </Route>
-
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
-  );
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/Home" element={<ProtectedRoute tipo="cliente"><Home /></ProtectedRoute>} />
+        <Route path="/inicio" element={<ProtectedRoute tipo="cliente"><Home /></ProtectedRoute>} />
+        <Route path="/produtos" element={<ProtectedRoute tipo="cliente"><Home /></ProtectedRoute>} />
+        <Route path="/carrinho" element={<ProtectedRoute tipo="cliente"><Carrinho /></ProtectedRoute>} />
+        <Route path="/produtos/novo" element={<ProtectedRoute tipo="admin"><CadastroProduto /></ProtectedRoute>} />
+        <Route path="/perfil" element={<ProtectedRoute tipo="cliente"><PerfilCliente /></ProtectedRoute>} />
+        <Route path="/admin/perfil" element={<ProtectedRoute tipo="admin"><PerfilAdmin /></ProtectedRoute>} />
+        <Route path="/relatorios" element={<ProtectedRoute tipo="admin"><Relatorios /></ProtectedRoute>} />
+        <Route path="/cadastro" element={<Cadastro />} />
+        <Route path="/esqueceu-senha" element={<EsqueuseSenha />} />
+        <Route path="/refazer-senha" element={<Refazersenha />} />
+        <Route path="/clientes" element={<ProtectedRoute tipo="admin"><Navigate to="/relatorios" replace /></ProtectedRoute>} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
+  )
 }
+export default App;
