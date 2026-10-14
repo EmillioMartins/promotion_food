@@ -4,7 +4,7 @@ import { carregarUsuarioLogado, encerrarSessao } from "../../mocks/mockAuth";
 import { carregarProdutos } from "../../utils/produtos";
 import { salvarCarrinho } from "../../utils/carrinho";
 import { calcularPromocaoProduto } from "../../utils/promocoes";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const CHAVE_SELECAO = "food-promotion-selecao";
 
@@ -25,6 +25,7 @@ function carregarSelecao() {
 }
 
 export default function Home() {
+  const navigate = useNavigate();
   const [produtos] = useState(carregarProdutos);
   const [selecao, setSelecao] = useState(carregarSelecao);
   const [quantidades, setQuantidades] = useState({});
@@ -101,6 +102,10 @@ export default function Home() {
     }
 
     salvarSelecao(selecaoAtualizada, quantidadeNova ? "Seleção atualizada." : `${produto.nome} removido da seleção.`);
+  }
+
+  function irParaCarrinho() {
+    if (produtosSelecionados.length > 0) navigate("/carrinho");
   }
 
   const produtosDisponiveis = produtos
@@ -260,9 +265,24 @@ export default function Home() {
             </div>
             <p className="selecao-nota">Valores sujeitos à confirmação na loja.</p>
             {mensagem && <p className="selecao-mensagem" role="status">{mensagem}</p>}
-            {produtosSelecionados.length > 0 && (
-              <button className="limpar-selecao" type="button" onClick={() => salvarSelecao({}, "Seleção limpa.")}>Limpar seleção</button>
-            )}
+            <div className="selecao-acoes">
+              <button
+                className="comprar-selecao"
+                type="button"
+                onClick={irParaCarrinho}
+                disabled={produtosSelecionados.length === 0}
+              >
+                Comprar
+              </button>
+              <button
+                className="limpar-selecao"
+                type="button"
+                onClick={() => salvarSelecao({}, "Seleção limpa.")}
+                disabled={produtosSelecionados.length === 0}
+              >
+                Limpar seleção
+              </button>
+            </div>
           </aside>
         </div>
       </section>
