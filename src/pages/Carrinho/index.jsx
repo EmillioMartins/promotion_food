@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { encerrarSessao } from '../../mocks/mockAuth'
 import { carregarCarrinho, salvarCarrinho } from '../../utils/carrinho'
 import { carregarProdutos } from '../../utils/produtos'
@@ -11,10 +11,10 @@ function formatarPreco(preco) {
 }
 
 export default function Carrinho() {
+  const navigate = useNavigate()
   const [produtos] = useState(carregarProdutos)
   const [carrinho, setCarrinho] = useState(carregarCarrinho)
   const [mensagem, setMensagem] = useState('')
-  const [compraFinalizada, setCompraFinalizada] = useState(null)
 
   const produtosDisponiveis = produtos
     .map((produto) => ({ produto, promocao: calcularPromocaoProduto(produto) }))
@@ -50,7 +50,6 @@ export default function Carrinho() {
 
     setCarrinho(carrinhoAtualizado)
     setMensagem(proximaMensagem)
-    setCompraFinalizada(null)
     return true
   }
 
@@ -73,13 +72,9 @@ export default function Carrinho() {
     atualizarCarrinho({}, 'Carrinho limpo.')
   }
 
-  function finalizarCompra() {
+  function aceitarItens() {
     if (itens.length === 0) return
-
-    const resumoCompra = { quantidade: quantidadeTotal, total: totalCompra }
-    if (atualizarCarrinho({}, '')) {
-      setCompraFinalizada(resumoCompra)
-    }
+    navigate('/finalizacao')
   }
 
   return (
@@ -102,13 +97,6 @@ export default function Carrinho() {
           <h1>Meu carrinho</h1>
           <p>Confira os produtos selecionados e o valor da compra.</p>
         </div>
-
-        {compraFinalizada && (
-          <div className="carrinho-confirmacao" role="status">
-            <strong>Compra finalizada no modo demonstrativo.</strong>
-            <span>{compraFinalizada.quantidade} {compraFinalizada.quantidade === 1 ? 'item' : 'itens'}, total de {formatarPreco(compraFinalizada.total)}. Nenhum pagamento foi processado.</span>
-          </div>
-        )}
 
         {mensagem && <p className="carrinho-mensagem" role="status">{mensagem}</p>}
 
@@ -170,8 +158,8 @@ export default function Carrinho() {
               <strong>{formatarPreco(totalCompra)}</strong>
             </div>
             <p>O valor é uma estimativa e será confirmado na loja.</p>
-            <button className="carrinho-finalizar" type="button" onClick={finalizarCompra} disabled={itens.length === 0}>
-              Finalizar compra
+            <button className="carrinho-finalizar" type="button" onClick={aceitarItens} disabled={itens.length === 0}>
+              Aceitar itens e continuar
             </button>
             <button className="carrinho-limpar" type="button" onClick={limparCarrinho} disabled={itens.length === 0}>
               Limpar carrinho

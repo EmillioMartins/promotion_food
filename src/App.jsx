@@ -4,6 +4,7 @@ import Cadastro from './pages/Cadastro'
 import Refazersenha from './pages/Cadastro/refazersenha'
 import EsqueuseSenha from './pages/Esqueceusenha'
 import Carrinho from './pages/Carrinho'
+import Finalizacao from './pages/Finalizacao'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import PerfilAdmin from './pages/Admin/Perfil'
@@ -20,6 +21,7 @@ function App() {
         <Route path="/inicio" element={<ProtectedRoute tipo="cliente"><Home /></ProtectedRoute>} />
         <Route path="/produtos" element={<ProtectedRoute tipo="cliente"><Home /></ProtectedRoute>} />
         <Route path="/carrinho" element={<ProtectedRoute tipo="cliente"><Carrinho /></ProtectedRoute>} />
+        <Route path="/finalizacao" element={<ProtectedRoute tipo="cliente"><Finalizacao /></ProtectedRoute>} />
         <Route path="/produtos/novo" element={<ProtectedRoute tipo="admin"><CadastroProduto /></ProtectedRoute>} />
         <Route path="/perfil" element={<ProtectedRoute tipo="cliente"><PerfilCliente /></ProtectedRoute>} />
         <Route path="/admin/perfil" element={<ProtectedRoute tipo="admin"><PerfilAdmin /></ProtectedRoute>} />
