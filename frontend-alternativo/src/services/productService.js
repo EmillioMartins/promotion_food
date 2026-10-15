@@ -2,8 +2,15 @@ import seed from '../mocks/products.json';
 import defaultStore from '../mocks/store.json';
 import { mock, nextId } from './http';
 import { daysUntil } from '../utils/date';
+import { mockProdutos } from '../../../src/mocks/mockProdutos.js';
 
-let db = structuredClone(seed);
+const imagesByName = new Map(mockProdutos.map(({ nome, imagem }) => [nome.toLowerCase(), imagem]));
+const imageAliases = { 'chá verde 20 sachês': 'Chá Verde Orgânico Sachê 20g' };
+let db = structuredClone(seed).map((product) => {
+  const imageName = imageAliases[product.name.toLowerCase()] || product.name;
+  const image = imagesByName.get(imageName.toLowerCase());
+  return image ? { ...product, images: [image] } : product;
+});
 
 export const findProduct = (id) => db.find((p) => p.id === Number(id));
 export const decrementStock = (id, qty) => {

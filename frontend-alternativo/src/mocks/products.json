@@ -9,7 +9,7 @@
     "promoPrice": 19.2,
     "discount": 45,
     "stock": 12,
-    "expiresAt": "2026-10-02",
+    "expiresAt": "2027-01-05",
     "batch": "L2309",
     "images": [],
     "store": { "name": "Mercado Bom Preço", "city": "Fortaleza, CE" }
@@ -24,7 +24,7 @@
     "promoPrice": 1.9,
     "discount": 50,
     "stock": 40,
-    "expiresAt": "2026-10-01",
+    "expiresAt": "2027-01-05",
     "batch": "IG0921",
     "images": [],
     "store": { "name": "Mercado Bom Preço", "city": "Fortaleza, CE" }
@@ -39,7 +39,7 @@
     "promoPrice": 5.4,
     "discount": 40,
     "stock": 18,
-    "expiresAt": "2026-10-03",
+    "expiresAt": "2027-01-05",
     "batch": "PF1188",
     "images": [],
     "store": { "name": "Mercado Bom Preço", "city": "Fortaleza, CE" }
@@ -54,7 +54,7 @@
     "promoPrice": 13.7,
     "discount": 45,
     "stock": 8,
-    "expiresAt": "2026-10-04",
+    "expiresAt": "2027-01-05",
     "batch": "QM0442",
     "images": [],
     "store": { "name": "Mercado Bom Preço", "city": "Fortaleza, CE" }
@@ -69,7 +69,7 @@
     "promoPrice": 6.5,
     "discount": 35,
     "stock": 50,
-    "expiresAt": "2026-10-13",
+    "expiresAt": "2027-01-05",
     "batch": "CH7001",
     "images": [],
     "store": { "name": "Mercado Bom Preço", "city": "Fortaleza, CE" }
@@ -84,7 +84,7 @@
     "promoPrice": 32.4,
     "discount": 35,
     "stock": 10,
-    "expiresAt": "2026-10-20",
+    "expiresAt": "2027-01-05",
     "batch": "AZ5500",
     "images": [],
     "store": { "name": "Mercado Bom Preço", "city": "Fortaleza, CE" }
@@ -99,7 +99,7 @@
     "promoPrice": 8.9,
     "discount": 40,
     "stock": 22,
-    "expiresAt": "2026-10-06",
+    "expiresAt": "2027-01-05",
     "batch": "SU1010",
     "images": [],
     "store": { "name": "Mercado Bom Preço", "city": "Fortaleza, CE" }
@@ -114,7 +114,7 @@
     "promoPrice": 4.5,
     "discount": 35,
     "stock": 30,
-    "expiresAt": "2026-10-12",
+    "expiresAt": "2027-01-05",
     "batch": "CV2020",
     "images": [],
     "store": { "name": "Mercado Bom Preço", "city": "Fortaleza, CE" }
