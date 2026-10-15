@@ -9,6 +9,7 @@ export const cx = (...c) => c.filter(Boolean).join(' ');
 /* ---------- Botões ---------- */
 const btnVariants = {
   primary: 'bg-brand text-white hover:bg-brand-600',
+  yellow: 'bg-accent text-brand hover:bg-[#ffd36b]',
   outline: 'border border-field bg-white text-ink hover:bg-surface',
   brandOutline: 'border border-brand bg-white text-brand hover:bg-surface',
   danger: 'border border-danger-line bg-white text-danger hover:bg-danger-soft',

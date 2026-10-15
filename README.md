@@ -1,4 +1,4 @@
-﻿<div align="center">
+<div align="center">
 
 # ðŸ·ï¸ Food Promotion Microservice
 
@@ -29,7 +29,9 @@ Com isso, o estabelecimento reduz perdas de estoque (desperdÃ­cio de alimentos
 
 As pastas originais foram preservadas. Os repositÃ³rios Git nÃ£o foram copiados; as dependÃªncias foram instaladas no destino a partir dos lockfiles, e os builds podem ser gerados novamente com os comandos abaixo.
 
-### AplicaÃ§Ã£o principal
+### Aplicação principal
+
+O frontend principal utiliza as telas de `frontend-alternativo`: catálogo, detalhes do produto, carrinho, pedidos, perfil do cliente e administração. A caixa **Minha seleção** do catálogo compartilha o carrinho dessas telas; **Comprar** abre o carrinho, onde o cliente informa a retirada e o pagamento antes de confirmar o pedido.
 
 ```bash
 npm ci
@@ -37,10 +39,6 @@ npm run dev
 ```
 
 Para gerar o build e executar os testes:
-
-Na área do cliente, adicione produtos à seleção e abra o carrinho. O botão **Aceitar itens e continuar** leva à revisão do pedido; a confirmação limpa a seleção e exibe o resumo da compra em modo demonstrativo, sem processar pagamento.
-
-
 
 ```bash
 npm run build
