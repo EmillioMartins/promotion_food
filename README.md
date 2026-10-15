@@ -1,57 +1,135 @@
-# Food Promotion
+<div align="center">
 
-Aplicação web para compras de produtos em promoção e gerenciamento de produtos e pedidos. O projeto usa React, React Router e Vite; no estado atual, os serviços usam dados simulados em `src/mocks` e não dependem de uma API externa.
+# ðŸ·ï¸ Food Promotion Microservice
 
-Repositório: https://github.com/EmillioMartins/promotion_food
+> **MicroserviÃ§o de GestÃ£o de PromoÃ§Ãµes e Descontos por Vencimento de Produtos.**
 
-## Requisitos
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)](#-iniciando-o-projeto-com-docker)
+[![Architecture](https://img.shields.io/badge/Architecture-Clean%20Architecture-orange?style=for-the-badge)](#-arquitetura-e-padroes)
+[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](#-licenca)
 
-- Node.js 20 ou superior e npm
-- Docker Desktop, caso prefira executar com Docker Compose
+</div>
 
-## Executar localmente
+---
+
+## ðŸ“Œ Sobre o Projeto
+
+O **Food Promotion** Ã© um microserviÃ§o integrante da plataforma de autoatendimento para supermercados. Sua finalidade Ã© gerenciar **campanhas promocionais**, aplicando **descontos dinÃ¢micos em produtos prÃ³ximos da data de vencimento**.
+
+Com isso, o estabelecimento reduz perdas de estoque (desperdÃ­cio de alimentos) e disponibiliza preÃ§os reduzidos aos clientes no totem ou aplicativo de pedidos.
+
+## Estrutura consolidada
+
+`Novo-promotion` usa a aplicaÃ§Ã£o de `food-promotion` como frontend principal. As outras implementaÃ§Ãµes e os serviÃ§os da equipe foram mantidos em subpastas, sem misturar aplicaÃ§Ãµes com interfaces e contratos de API diferentes:
+
+- `src/` e `back-end/`: aplicaÃ§Ã£o principal e API original.
+- `frontend-alternativo/`: implementaÃ§Ã£o de `food-promotion-main`.
+- `equipe/frontend/` e `equipe/server/`: aplicaÃ§Ã£o da equipe integrada Ã  API com mensageria RabbitMQ.
+- `equipe/backend/`: API CRUD de usuÃ¡rios e publicaÃ§Ãµes, com controllers em classes e Prisma/SQLite. Consulte [equipe/backend/README.md](./equipe/backend/README.md).
+
+As pastas originais foram preservadas. Os repositÃ³rios Git nÃ£o foram copiados; as dependÃªncias foram instaladas no destino a partir dos lockfiles, e os builds podem ser gerados novamente com os comandos abaixo.
+
+### Aplicação principal
+
+O frontend principal utiliza as telas de `frontend-alternativo`: catálogo, detalhes do produto, carrinho, pedidos, perfil do cliente e administração. A caixa **Minha seleção** do catálogo compartilha o carrinho dessas telas; **Comprar** abre o carrinho, onde o cliente informa a retirada e o pagamento antes de confirmar o pedido.
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
-Abra http://localhost:5173 no navegador.
-
-## Executar com Docker Compose
-
-```bash
-docker compose up
-```
-
-A aplicação ficará disponível em http://localhost:5173. Para encerrar, pressione `Ctrl+C` ou execute `docker compose down` em outro terminal.
-
-## Build de produção
+Para gerar o build e executar os testes:
 
 ```bash
 npm run build
-npm run preview
+npm test
 ```
 
-Os arquivos de produção são gerados em `dist/`.
+### AplicaÃ§Ã£o e API da equipe
 
-## Funcionalidades
+Com Docker Desktop em execuÃ§Ã£o:
 
-- Área do cliente: catálogo, detalhes do produto, carrinho, pedidos e perfil.
-- Área administrativa: cadastro e edição de produtos, gestão de pedidos e perfil.
-- Autenticação e dados de demonstração mantidos localmente em mocks.
+```bash
+docker compose -f equipe/frontend/docker-compose.yml up --build
+```
 
-## Organização do projeto
+A aplicaÃ§Ã£o da equipe fica em `http://localhost:5173`; a API fica em `http://localhost:3000`. Consulte [equipe/API.md](./equipe/API.md) para rotas, autenticaÃ§Ã£o e mensageria. Para testar a API da equipe sem Docker, instale as dependÃªncias com `npm --prefix equipe/server ci` e execute `npm --prefix equipe/server test`.
 
-- `src/pages/`: telas de cliente, administração e autenticação.
-- `src/components/` e `src/layouts/`: componentes e estruturas compartilhadas.
-- `src/context/`: estado de autenticação e carrinho.
-- `src/services/`: serviços e camada HTTP.
-- `src/mocks/`: dados simulados usados durante o desenvolvimento.
-- `__src/`: implementações e páginas de uma versão anterior/em desenvolvimento.
+### Frontend alternativo
 
-## Scripts
+Para executar a implementaÃ§Ã£o alternativa:
 
-- `npm run dev`: inicia o servidor de desenvolvimento.
-- `npm run build`: gera o build de produção.
-- `npm run preview`: serve localmente o build gerado.
+```bash
+npm --prefix frontend-alternativo ci
+npm --prefix frontend-alternativo run dev
+```
+
+---
+
+## ðŸ› ï¸ Tech Stack & Arquitetura
+
+- **Linguagem & Runtime:** React.js 
+- **ContainerizaÃ§Ã£o:** Docker e Docker Compose
+
+---
+
+## ðŸš€ Iniciando o Projeto com Docker
+
+### ðŸ“‹ PrÃ©-requisitos
+* [Docker Desktop](https://www.docker.com/products/docker-desktop/) instalado e em execuÃ§Ã£o.
+* [Git](https://git-scm.com/) instalado.
+
+---
+
+### ExecuÃ§Ã£o PadrÃ£o (Nginx)
+
+1. Clone o repositÃ³rio e entre na pasta:
+   ```bash
+   git clone https://github.com/fullcycle-gt4/food-promotion
+   cd food-promotion
+   ```
+
+2. Copie `.env.example` para `.env` (PowerShell: `Copy-Item .env.example .env`; Bash: `cp .env.example .env`). Altere `POSTGRES_USER` e substitua o valor de exemplo de `POSTGRES_PASSWORD`; ajuste tambÃ©m `APP_PORT`, `DEV_PORT` ou `DB_PORT` se necessÃ¡rio. O Compose exige essas credenciais via `.env`. Esse arquivo Ã© ignorado pelo Git e nÃ£o deve ser versionado.
+
+3. Construa a imagem e inicie o frontend:
+   ```bash
+   docker compose up -d --build
+   ```
+
+4. Confira o estado dos containers e a saÃºde da aplicaÃ§Ã£o; depois abra `http://localhost:8080` (ou a porta definida em `APP_PORT`). O endpoint `GET /health` deve responder `200` com `ok`:
+   ```bash
+   docker compose ps
+   curl http://localhost:8080/health
+   ```
+
+5. Para parar e remover os containers sem apagar os dados persistidos:
+   ```bash
+   docker compose down
+   ```
+
+O banco usa o volume nomeado `postgres_data`, que Ã© mantido por `docker compose down`. NÃ£o use `docker compose down -v` se quiser preservar os dados.
+
+### Desenvolvimento (Vite)
+
+1. Inicie o perfil de desenvolvimento com hot reload:
+   ```bash
+   docker compose --profile dev up -d --build frontend-dev
+   ```
+
+2. Acesse `http://localhost:5173` (ou a porta definida em `DEV_PORT`). O cÃ³digo do workspace Ã© montado no container; `node_modules` usa um volume Docker separado.
+
+3. Para parar o serviÃ§o de desenvolvimento:
+   ```bash
+   docker compose --profile dev down
+   ```
+
+O frontend atual ainda utiliza dados mockados e nÃ£o lÃª nem grava no PostgreSQL. O banco jÃ¡ Ã© iniciado e persistido pelo Compose para a integraÃ§Ã£o com uma API futura.
+
+ðŸ‘¥ Equipe do ProjetoDesenvolvido pelo grupo GT4 - Full Cycle.
+
+GitHub: https://github.com/DeilsonGilmar 
+GitHub: https://github.com/senna47 
+GitHub: https://github.com/pomptrash 
+GitHub: https://github.com/amandapaulav 
+GitHub: https://github.com/pedrorochaneto 
+GitHub: https://github.com/EmillioMartins 

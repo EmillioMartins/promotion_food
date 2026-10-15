@@ -1,14 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
-import App from './App.jsx';
-import { AuthProvider } from './context/AuthContext.jsx';
-import { CartProvider } from './context/CartContext.jsx';
-import { ToastProvider } from './components/Toast.jsx';
-import './index.css';
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
+import { AuthProvider } from '../frontend-alternativo/src/context/AuthContext.jsx'
+import { CartProvider } from '../frontend-alternativo/src/context/CartContext.jsx'
+import { ToastProvider } from '../frontend-alternativo/src/components/Toast.jsx'
+import App from './App.jsx'
+import '../frontend-alternativo/src/index.css'
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
     <BrowserRouter>
       <AuthProvider>
         <CartProvider>
@@ -18,5 +18,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         </CartProvider>
       </AuthProvider>
     </BrowserRouter>
-  </React.StrictMode>,
-);
+  </StrictMode>,
+)

@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./index.html', './src/**/*.{js,jsx}'],
+  content: [
+    './index.html',
+    './src/**/*.{js,jsx}',
+    './frontend-alternativo/src/**/*.{js,jsx}',
+  ],
   theme: {
     extend: {
       fontFamily: { sans: ['Lexend', 'system-ui', 'sans-serif'] },
