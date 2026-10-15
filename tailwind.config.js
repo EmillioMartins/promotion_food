@@ -26,7 +26,8 @@ export default {
       },
       boxShadow: { panel: '0 20px 50px rgba(20,40,30,.25)' },
       backgroundImage: {
-        backdrop: 'repeating-linear-gradient(135deg,#c9d3c4 0 14px,#c2ccbd 14px 28px)',
+        backdrop:
+          'linear-gradient(rgba(38,91,25,.45),rgba(38,91,25,.45)),url(https://images.unsplash.com/photo-1542838132-92c53300491e)',
         placeholder: 'repeating-linear-gradient(135deg,#eef0ea 0 10px,#e6e9e2 10px 20px)',
       },
     },
