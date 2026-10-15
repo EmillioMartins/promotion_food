@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
-import { EventEmitter } from 'node:events';
 import { test } from 'node:test';
+import { FakeChannel } from './FakeChannel.js';
+import { FakeConnection } from './FakeConnection.js';
 import {
   assertMessagingTopology,
   DEAD_LETTER_EXCHANGE,
@@ -16,66 +17,6 @@ import {
   MAX_RETRY_ATTEMPTS,
 } from './queueConfig.js';
 import { createOrderEventHandler } from './orderEventConsumer.js';
-
-class FakeChannel extends EventEmitter {
-  exchanges = [];
-  queues = [];
-  bindings = [];
-  messages = [];
-  acknowledgements = [];
-  rejections = [];
-  closed = false;
-
-  async assertExchange(...args) {
-    this.exchanges.push(args);
-  }
-
-  async assertQueue(...args) {
-    this.queues.push(args);
-  }
-
-  async bindQueue(...args) {
-    this.bindings.push(args);
-  }
-
-  async prefetch() {}
-
-  ack(message) {
-    this.acknowledgements.push(message);
-  }
-
-  nack(...args) {
-    this.rejections.push(args);
-  }
-
-  sendToQueue(queue, body, options) {
-    this.messages.push({ queue, body, options });
-    return true;
-  }
-
-  async waitForConfirms() {}
-
-  async close() {
-    this.closed = true;
-    this.emit('close');
-  }
-}
-
-class FakeConnection extends EventEmitter {
-  channels = [];
-  closed = false;
-
-  async createConfirmChannel() {
-    const channel = new FakeChannel();
-    this.channels.push(channel);
-    return channel;
-  }
-
-  async close() {
-    this.closed = true;
-    this.emit('close');
-  }
-}
 
 test('messaging topology declares durable order and dead-letter queues', async () => {
   const channel = new FakeChannel();
