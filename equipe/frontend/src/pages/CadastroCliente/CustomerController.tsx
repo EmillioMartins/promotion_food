@@ -30,4 +30,3 @@ function Controller(arg0: string): (target: typeof CustomerController, context: 
     return target;
   };
 }
-
