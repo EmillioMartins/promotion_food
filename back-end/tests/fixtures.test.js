@@ -1,15 +1,18 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import { carregarDadosApi, fixtures } from '../src/fixtures/index.js'
+import { mapearProdutoParaApi } from '../src/mappers/product.mapper.js'
 
 const HOJE = '2026-10-05'
 
 test('mapeia produtos para o contrato API e recalcula descontos por vencimento', () => {
   const dados = carregarDadosApi(HOJE)
-  const suco = dados.products.find((produto) => produto.id === 7)
-  const chocolate = dados.products.find((produto) => produto.id === 5)
+  const suco = mapearProdutoParaApi({ ...fixtures.products.find((produto) => produto.id === 7), expiresAt: '2026-10-06' }, HOJE)
+  const chocolate = mapearProdutoParaApi({ ...fixtures.products.find((produto) => produto.id === 5), expiresAt: '2026-10-13' }, HOJE)
 
-  assert.equal(dados.products.length, 4)
+  assert.equal(dados.products.length, 8)
+  assert.equal(dados.products.every((produto) => produto.expiresAt === '2027-01-05'), true)
+  assert.equal(dados.products.every((produto) => produto.discount === 0), true)
   assert.equal(suco.discount, 75)
   assert.equal(suco.promoPrice, 3.73)
   assert.equal(chocolate.discount, 40)
