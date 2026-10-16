@@ -54,8 +54,8 @@ npm --prefix back-end ci
 npm --prefix back-end run dev
 ```
 
-A API fica em `http://localhost:3000`. A interface Swagger está em
-`http://localhost:3000/api/docs` e a especificação OpenAPI em
+A API está disponível em `http://localhost:3000`. A documentação interativa Swagger
+está em `http://localhost:3000/api/docs`, e a especificação OpenAPI está em
 `http://localhost:3000/api/openapi.json`.
 
 Os endpoints versionados de leitura do catálogo usam `/api/v1`. Nesta etapa, os dados
@@ -76,11 +76,11 @@ Para desenvolvimento com reinicialização automática do Node, execute:
 docker compose --profile dev up --build -d db api-dev
 ```
 
-A API de desenvolvimento fica na porta `3001` por padrão. O Dockerfile separa os
-estágios de desenvolvimento e produção. O Compose configura uma rede compartilhada,
-volume persistente do PostgreSQL e healthchecks, além de aguardar o banco ficar saudável
-antes de iniciar a API. O catálogo ainda usa fixtures e não persiste dados de negócio
-no banco. Consulte [back-end/README.md](./back-end/README.md) para mais detalhes.
+A API de desenvolvimento usa a porta `3001` por padrão. O Dockerfile separa os estágios
+de desenvolvimento e produção. O Compose configura uma rede compartilhada e um volume
+persistente para o PostgreSQL. Também verifica a saúde do banco e aguarda até que esteja
+pronto antes de iniciar a API. O catálogo ainda usa fixtures e não persiste dados de
+negócio no banco. Consulte [back-end/README.md](./back-end/README.md) para mais detalhes.
 
 ### AplicaÃ§Ã£o e API da equipe
 
