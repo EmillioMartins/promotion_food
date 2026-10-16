@@ -55,7 +55,7 @@ O volume `postgres_data` persiste os dados do PostgreSQL entre reinicializaçõe
 O código em `src/` separa responsabilidades por camada:
 
 | Pasta/arquivo | Responsabilidade |
-|---------------|------------------|
+| --------------- | ------------------ |
 | `routes/` | Declara os caminhos HTTP e associa cada rota ao controller correspondente. |
 | `controllers/` | Recebe `request`/`response`, valida a entrada e converte o resultado do serviço em resposta HTTP. |
 | `services/` | Implementa as operações do catálogo sem depender do Express. |
@@ -76,7 +76,7 @@ Os arquivos JSON de dados simulados ficam separados do código em `back-end/mock
 As rotas novas usam o prefixo versionado `/api/v1` e substantivos no plural para coleções:
 
 | Método | Padrão | Uso |
-|--------|--------|-----|
+| -------- | -------- | ----- |
 | `GET` | `/resources` | Listar/filtrar recursos; coleções paginadas usam `page` e `pageSize` |
 | `GET` | `/resources/{id}` | Consultar um recurso |
 | `POST` | `/resources` | Criar um recurso (retornar `201 Created` e cabeçalho `Location`) |
