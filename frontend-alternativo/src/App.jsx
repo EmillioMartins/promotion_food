@@ -12,10 +12,13 @@ import Cart from './pages/client/Cart.jsx';
 import MyOrders from './pages/client/MyOrders.jsx';
 import ClientProfile from './pages/client/Profile.jsx';
 
-import AdminProducts from './pages/admin/Products.jsx';
-import ProductForm from './pages/admin/ProductForm.jsx';
-import AdminOrders from './pages/admin/Orders.jsx';
-import AdminProfile from './pages/admin/Profile.jsx';
+import AdminProducts from './pages/Admin/Products.jsx';
+import ProductForm from './pages/Admin/ProductForm.jsx';
+import AdminOrders from './pages/Admin/Orders.jsx';
+import AdminProfile from './pages/Admin/Profile.jsx';
+import AdminUsers from './pages/Admin/Users.jsx';
+import AdminReports from './pages/Admin/Reports.jsx';
+import AdminDashboard from './pages/Admin/Dashboard.jsx';
 
 export default function App() {
   return (
@@ -45,11 +48,13 @@ export default function App() {
           </RequireAuth>
         }
       >
-        <Route index element={<Navigate to="produtos" replace />} />
+        <Route index element={<AdminDashboard />} />
         <Route path="produtos" element={<AdminProducts />} />
         <Route path="produtos/novo" element={<ProductForm />} />
         <Route path="produtos/:id/editar" element={<ProductForm />} />
         <Route path="pedidos" element={<AdminOrders />} />
+        <Route path="usuarios" element={<AdminUsers />} />
+        <Route path="relatorios" element={<AdminReports />} />
         <Route path="perfil" element={<AdminProfile />} />
       </Route>
 

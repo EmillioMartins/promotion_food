@@ -45,6 +45,19 @@ npm run build
 npm test
 ```
 
+### API REST independente
+
+O backend Express pode ser iniciado na raiz do repositório:
+
+```bash
+npm --prefix back-end ci
+npm --prefix back-end run dev
+```
+
+A API fica em `http://localhost:3000`. Consulte a interface Swagger em `http://localhost:3000/api/docs` ou a especificação OpenAPI em `http://localhost:3000/api/openapi.json`. Os endpoints versionados de leitura do catálogo usam `/api/v1`; nesta etapa, os dados vêm das fixtures e as operações de escrita ainda não estão habilitadas. Consulte [back-end/README.md](./back-end/README.md) para o contrato REST, envelopes e endpoints disponíveis.
+
+Para subir a API e o PostgreSQL em containers, copie `.env.example` para `.env` e execute `docker compose up --build -d db api`. Para desenvolvimento com reinicialização automática do Node, use `docker compose --profile dev up --build -d db api-dev`; a API de desenvolvimento fica na porta `3001` por padrão. O Dockerfile tem estágios de desenvolvimento e produção, e o Compose configura rede compartilhada, volume persistente do PostgreSQL, healthcheck e espera pelo banco saudável. A API ainda usa fixtures para o catálogo e não persiste dados de negócio no banco. Consulte [back-end/README.md](./back-end/README.md) para comandos e detalhes.
+
 ### AplicaÃ§Ã£o e API da equipe
 
 Com Docker Desktop em execuÃ§Ã£o:
