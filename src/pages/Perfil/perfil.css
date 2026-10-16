@@ -7,7 +7,7 @@
 .cliente-perfil-header nav { display: flex; align-items: center; gap: 24px; }
 .cliente-perfil-header nav a { color: #45635a; font-size: 13px; font-weight: 600; text-decoration: none; }
 .cliente-perfil-header nav a:hover { color: #173a34; }
-.cliente-perfil-header nav .cliente-perfil-cart-link { position: relative; display: grid; width: 40px; height: 40px; place-items: center; border: 1px solid #dce5e1; border-radius: 50%; background: #f5f7f5; color: #173a34; font-size: 19px; text-decoration: none; }
+.cliente-perfil-header nav .cliente-perfil-cart-link { position: relative; display: grid; width: 40px; height: 40px; place-items: center; border: 1px solid #dce5e1; border-radius: 50%; background: #f5f7f5; color: #173a34; text-decoration: none; }
 .cliente-perfil-header nav .cliente-perfil-cart-link:hover { background: #eaf1ed; }
 .cliente-perfil-cart-count { position: absolute; top: -5px; right: -6px; display: grid; min-width: 18px; height: 18px; place-items: center; padding: 0 4px; border-radius: 9px; background: #f4b740; color: #173a34; font-size: 10px; font-weight: 700; }
 .cliente-perfil-cart-link:focus-visible { outline: 2px solid #38836b; outline-offset: 3px; }
