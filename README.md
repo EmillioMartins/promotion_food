@@ -128,12 +128,12 @@ npm --prefix frontend-alternativo run dev
 
 2. Copie `.env.example` para `.env` (PowerShell: `Copy-Item .env.example .env`; Bash: `cp .env.example .env`). Altere `POSTGRES_USER` e substitua o valor de exemplo de `POSTGRES_PASSWORD`; ajuste tambÃ©m `APP_PORT`, `DEV_PORT` ou `DB_PORT` se necessÃ¡rio. O Compose exige essas credenciais via `.env`. Esse arquivo Ã© ignorado pelo Git e nÃ£o deve ser versionado.
 
-3. Construa a imagem e inicie o frontend:
+3. Construa as imagens e inicie o frontend, a API e o PostgreSQL:
    ```bash
    docker compose up -d --build
    ```
 
-4. Confira o estado dos containers e a saÃºde da aplicaÃ§Ã£o; depois abra `http://localhost:8080` (ou a porta definida em `APP_PORT`). O endpoint `GET /health` deve responder `200` com `ok`:
+4. Confira o estado e a saúde dos containers. O endpoint `GET /health` do Nginx deve responder `200` com `ok`; depois abra `http://localhost:8080` (ou a porta definida em `APP_PORT`). A API fica disponível em `http://localhost:3000` (ou `API_PORT`), com healthcheck em `/api/v1/health`:
    ```bash
    docker compose ps
    curl http://localhost:8080/health
@@ -153,7 +153,7 @@ O banco usa o volume nomeado `postgres_data`, que Ã© mantido por `docker compo
    docker compose --profile dev up -d --build frontend-dev
    ```
 
-2. Acesse `http://localhost:5173` (ou a porta definida em `DEV_PORT`). O cÃ³digo do workspace Ã© montado no container; `node_modules` usa um volume Docker separado.
+2. Acesse `http://localhost:5173` (ou a porta definida em `DEV_PORT`). O Vite usa a mesma porta publicada pelo Compose. O código do workspace é montado no container; `node_modules` usa um volume Docker separado. O PostgreSQL mantém seus dados no volume `postgres_data`.
 
 3. Para parar o serviÃ§o de desenvolvimento:
    ```bash
