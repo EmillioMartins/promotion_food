@@ -54,9 +54,33 @@ npm --prefix back-end ci
 npm --prefix back-end run dev
 ```
 
-A API fica em `http://localhost:3000`. Consulte a interface Swagger em `http://localhost:3000/api/docs` ou a especificação OpenAPI em `http://localhost:3000/api/openapi.json`. Os endpoints versionados de leitura do catálogo usam `/api/v1`; nesta etapa, os dados vêm das fixtures e as operações de escrita ainda não estão habilitadas. Consulte [back-end/README.md](./back-end/README.md) para o contrato REST, envelopes e endpoints disponíveis.
+A API está disponível em `http://localhost:3000`. A documentação interativa Swagger
+está em `http://localhost:3000/api/docs`, e a especificação OpenAPI está em
+`http://localhost:3000/api/openapi.json`.
 
-Para subir a API e o PostgreSQL em containers, copie `.env.example` para `.env` e execute `docker compose up --build -d db api`. Para desenvolvimento com reinicialização automática do Node, use `docker compose --profile dev up --build -d db api-dev`; a API de desenvolvimento fica na porta `3001` por padrão. O Dockerfile tem estágios de desenvolvimento e produção, e o Compose configura rede compartilhada, volume persistente do PostgreSQL, healthcheck e espera pelo banco saudável. A API ainda usa fixtures para o catálogo e não persiste dados de negócio no banco. Consulte [back-end/README.md](./back-end/README.md) para comandos e detalhes.
+Os endpoints versionados de leitura do catálogo usam `/api/v1`. Nesta etapa, os dados
+vêm das fixtures e as operações de escrita ainda não estão habilitadas. Consulte
+[back-end/README.md](./back-end/README.md) para ver o contrato REST, os envelopes e
+os endpoints disponíveis.
+
+Para iniciar a API de produção e o PostgreSQL, copie `.env.example` para `.env` e
+execute:
+
+```bash
+docker compose up --build -d db api
+```
+
+Para desenvolvimento com reinicialização automática do Node, execute:
+
+```bash
+docker compose --profile dev up --build -d db api-dev
+```
+
+A API de desenvolvimento usa a porta `3001` por padrão. O Dockerfile separa os estágios
+de desenvolvimento e produção. O Compose configura uma rede compartilhada e um volume
+persistente para o PostgreSQL. Também verifica a saúde do banco e aguarda até que esteja
+pronto antes de iniciar a API. O catálogo ainda usa fixtures e não persiste dados de
+negócio no banco. Consulte [back-end/README.md](./back-end/README.md) para mais detalhes.
 
 ### AplicaÃ§Ã£o e API da equipe
 

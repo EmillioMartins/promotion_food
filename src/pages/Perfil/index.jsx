@@ -70,7 +70,11 @@ export default function PerfilCliente() {
             aria-label={`Carrinho, ${quantidadeCarrinho} ${quantidadeCarrinho === 1 ? 'item' : 'itens'}`}
             title="Carrinho"
           >
-            <span aria-hidden="true">🛒</span>
+            <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 2-1.6L21 8H6" />
+              <circle cx="10" cy="20" r="1" />
+              <circle cx="18" cy="20" r="1" />
+            </svg>
             <span className="cliente-perfil-cart-count" aria-hidden="true">{quantidadeCarrinho}</span>
           </Link>
           <Link to="/" onClick={encerrarSessao}>Sair</Link>

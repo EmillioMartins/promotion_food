@@ -4,10 +4,10 @@ import process from 'node:process'
 import swaggerUi from 'swagger-ui-express'
 import catalogRoutes from './routes/catalog.routes.js'
 import healthRoutes from './routes/health.routes.js'
-import { rotaNaoEncontrada, tratarErro } from './middleware/error-handler.js'
+import { rotaNaoEncontrada, tratarErro } from './errors/error-handler.js'
 import { requestId } from './middleware/request-id.js'
 import openApiSpec from './openapi.js'
-import { healthHandler } from './routes/health.routes.js'
+import { healthHandler } from './controllers/health.controller.js'
 
 const app = express()
 const allowedOrigins = (process.env.FRONTEND_URL || 'http://localhost:8080')

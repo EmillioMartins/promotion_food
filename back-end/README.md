@@ -50,6 +50,23 @@ O `back-end/Dockerfile` usa estágios separados para dependências de produção
 
 O volume `postgres_data` persiste os dados do PostgreSQL entre reinicializações e `docker compose down`. A API atualmente lê os dados do catálogo a partir de fixtures; apesar de receber as configurações do PostgreSQL, ainda não persiste os dados de negócio no banco.
 
+## Organização do backend
+
+O código em `src/` separa responsabilidades por camada:
+
+| Pasta/arquivo | Responsabilidade |
+| --------------- | ------------------ |
+| `routes/` | Declara os caminhos HTTP e associa cada rota ao controller correspondente. |
+| `controllers/` | Recebe `request`/`response`, valida a entrada e converte o resultado do serviço em resposta HTTP. |
+| `services/` | Implementa as operações do catálogo sem depender do Express. |
+| `validators/` | Valida e converte parâmetros de rota e query string. |
+| `errors/` | Define erros da API e centraliza os middlewares para erros e rotas inexistentes. |
+| `middleware/` | Contém middlewares transversais, como a geração do identificador de requisição. |
+| `fixtures/` | Carrega e prepara os dados simulados usados pela API. |
+| `mappers/` | Converte os dados das fixtures para os contratos públicos da API. |
+
+Os arquivos JSON de dados simulados ficam separados do código em `back-end/mocks/`. O fluxo de uma requisição de catálogo é `routes → controllers → validators/services → errors/resposta`; assim, regras do catálogo não ficam embutidas nos arquivos de rotas.
+
 - Documentação interativa: `http://localhost:3000/api/docs`
 - Especificação OpenAPI 3.1: `http://localhost:3000/api/openapi.json`
 - Verificação de saúde: `GET /api/v1/health` (o caminho legado `GET /api/health` continua disponível)
@@ -59,7 +76,7 @@ O volume `postgres_data` persiste os dados do PostgreSQL entre reinicializaçõe
 As rotas novas usam o prefixo versionado `/api/v1` e substantivos no plural para coleções:
 
 | Método | Padrão | Uso |
-|--------|--------|-----|
+| -------- | -------- | ----- |
 | `GET` | `/resources` | Listar/filtrar recursos; coleções paginadas usam `page` e `pageSize` |
 | `GET` | `/resources/{id}` | Consultar um recurso |
 | `POST` | `/resources` | Criar um recurso (retornar `201 Created` e cabeçalho `Location`) |

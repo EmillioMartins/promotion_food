@@ -1,3 +1,4 @@
+import { ApiError } from './api-error.js'
 import { responderErro } from '../utils/api-response.js'
 
 export function rotaNaoEncontrada(request, response) {
@@ -10,6 +11,15 @@ export function rotaNaoEncontrada(request, response) {
 
 export function tratarErro(error, request, response, next) {
   if (response.headersSent) return next(error)
+
+  if (error instanceof ApiError) {
+    return responderErro(response, {
+      status: error.status,
+      code: error.code,
+      message: error.message,
+      details: error.details,
+    })
+  }
 
   if (error.type === 'entity.parse.failed') {
     return responderErro(response, {

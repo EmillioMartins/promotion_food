@@ -35,7 +35,7 @@ function Relatorios() {
 			<main className="dashboard">
 				<header className="page-header">
 					<div><span className="eyebrow">VISAO GERAL / 2024</span><h1>Relatorios</h1><p>Acompanhe o desempenho das suas promocoes em um so lugar.</p></div>
-					<div className="header-actions"><button className="icon-button" aria-label="Notificacoes">!</button><button className="export-button">Exportar relatorio <span>↗</span></button></div>
+					<div className="header-actions"><button className="icon-button" aria-label="Notificacoes">!</button><button className="export-button">Exportar relatorio <svg aria-hidden="true" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 11 11 5M5 5h6v6" /></svg></button></div>
 				</header>
 
 				<div className="period-bar"><span>Periodo analisado</span><button className="period-button">01 Jun 2024 - 30 Jun 2024 <span>⌄</span></button><span className="updated">Atualizado ha 5 min</span></div>
