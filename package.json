@@ -9,8 +9,12 @@
     "lint": "eslint src tests shared",
     "preview": "vite preview",
     "test": "node --test tests/promocoes.test.js",
-    "dev:api": "npm --prefix back-end run dev",
-    "test:api": "npm --prefix back-end test"
+    "dev:api": "npm --prefix backend run dev",
+    "test:api": "npm --prefix backend test",
+    "typecheck:api": "npm --prefix backend run typecheck",
+    "prisma:generate": "npm --prefix backend run prisma:generate",
+    "prisma:migrate": "npm --prefix backend run prisma:migrate",
+    "prisma:migrate:deploy": "npm --prefix backend run prisma:migrate:deploy"
   },
   "dependencies": {
     "react": "^19.2.8",
